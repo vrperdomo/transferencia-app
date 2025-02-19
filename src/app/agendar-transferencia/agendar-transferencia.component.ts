@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { TransferenciaService, Transferencia } from '../transferencia.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-agendar-transferencia',
-  templateUrl: './agendar-transferencia.component.html',
-  styleUrls: ['./agendar-transferencia.component.css']
+  templateUrl: './agendar-transferencia.component.html'
 })
-export class AgendarTransferenciaComponent implements OnInit {
+export class AgendarTransferenciaComponent {
+  transferencia: Transferencia = { contaOrigem: '', contaDestino: '', valor: 0, dias: 0 };
 
-  constructor() { }
+  constructor(private transferenciaService: TransferenciaService) { }
 
-  ngOnInit(): void {
+  agendar() {
+    this.transferenciaService.agendarTransferencia(this.transferencia).subscribe(
+      response => {
+       
+       this.transferencia = { contaOrigem: '', contaDestino: '', valor: 0, dias: 0 }; // Limpar o formulário
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error);
+      }
+    );
   }
-
 }

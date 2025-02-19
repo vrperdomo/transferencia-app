@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { TransferenciaService, Transferencia } from '../transferencia.service';
 
 @Component({
   selector: 'app-extrato',
-  templateUrl: './extrato.component.html',
-  styleUrls: ['./extrato.component.css']
+  templateUrl: './extrato.component.html'
 })
 export class ExtratoComponent implements OnInit {
+  extrato: Transferencia[] = [];
 
-  constructor() { }
+  constructor(private transferenciaService: TransferenciaService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.transferenciaService.obterExtrato().subscribe(data => {
+      this.extrato = data;
+    });
   }
-
 }

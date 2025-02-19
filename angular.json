@@ -67,7 +67,8 @@
               "browserTarget": "transferencia-app:build:production"
             },
             "development": {
-              "browserTarget": "transferencia-app:build:development"
+              "browserTarget": "transferencia-app:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
